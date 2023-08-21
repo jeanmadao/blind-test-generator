@@ -1,23 +1,24 @@
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion"
 
 type Props = {
-  loadingTimeInSecs: number
+  fillingTimeInSecs: number
 }
 
-export const ProgressBar:React.FC<Props> = ({ loadingTimeInSecs }) => {
-  const { fps, width, height } = useVideoConfig()
-  const loadingTimeInFrames = loadingTimeInSecs * fps
+export const ProgressBar:React.FC<Props> = ({ fillingTimeInSecs }) => {
+  const { fps, width, height, durationInFrames } = useVideoConfig()
+  const fillingTimeInFrames = fillingTimeInSecs * fps
   const frame = useCurrentFrame()
 
   const absoluteFillStyle = {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'green',
+    // FontSize: 100
+    // backgroundColor: 'green',
   }
 
   const progressBarStyle = {
     position: 'absolute',
-    bottom: height * 0.1
+    bottom: height * 0.1,
   } as React.CSSProperties
 
   const barBorderStyle = {
@@ -32,9 +33,12 @@ export const ProgressBar:React.FC<Props> = ({ loadingTimeInSecs }) => {
   const barFillerStyle = {
     borderRadius: 20,
     height: height * 0.07,
-    width: interpolate(frame, [0, loadingTimeInFrames], [0, barBorderStyle.width - 2 * (barBorderStyle.padding + barBorderStyle.borderWidth)], {
-      extrapolateRight: 'clamp'
-    }),
+    width: interpolate(
+      frame,
+      [0, fillingTimeInFrames],
+      [0, barBorderStyle.width - 2 * (barBorderStyle.padding + barBorderStyle.borderWidth)],
+      { extrapolateRight: 'clamp' }
+    ),
     backgroundColor: 'white'
   }
   
@@ -45,6 +49,7 @@ export const ProgressBar:React.FC<Props> = ({ loadingTimeInSecs }) => {
           <div style={barFillerStyle} id='bar-filler'>{}</div>
         </div>
       </div>
+
     </AbsoluteFill>
   )
 }
