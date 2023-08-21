@@ -1,4 +1,4 @@
-import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion"
+import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion"
 
 type Props = {
   loadingTimeInSecs: number
@@ -32,7 +32,9 @@ export const ProgressBar:React.FC<Props> = ({ loadingTimeInSecs }) => {
   const barFillerStyle = {
     borderRadius: 20,
     height: height * 0.07,
-    width: (barBorderStyle.width - 2 * (barBorderStyle.padding + barBorderStyle.borderWidth)) * Math.min(1, frame / loadingTimeInFrames),
+    width: interpolate(frame, [0, loadingTimeInFrames], [0, barBorderStyle.width - 2 * (barBorderStyle.padding + barBorderStyle.borderWidth)], {
+      extrapolateRight: 'clamp'
+    }),
     backgroundColor: 'white'
   }
   
