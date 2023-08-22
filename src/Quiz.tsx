@@ -1,4 +1,4 @@
-import { Sequence, Series, staticFile, useVideoConfig } from "remotion"
+import { Sequence, staticFile, useVideoConfig } from "remotion"
 import { ProgressBar } from "./ProgressBar"
 import { timing, cdClip } from "./helper"
 import { Clip } from "./Clip"
@@ -16,16 +16,6 @@ type Props = {
 export const Quiz:React.FC<Props> = ({ songName, songArtist, songSrc, songDetails, revealFrame, startFrame }) => {
   const { fps } = useVideoConfig()
   return (
-    // <Series>
-    //   <Series.Sequence durationInFrames={fps * (timing.guessingTimeInSecs + timing.transitionTimeInSecs)}>
-    //     <Clip src={staticFile(songSrc)} startFrom={startFrame} />
-    //     <Clip src={staticFile(cdClip.src)} startFrom={cdClip.startFrom} />
-    //     <ProgressBar fillingTimeInSecs={timing.guessingTimeInSecs} />
-    //   </Series.Sequence>
-    //   <Series.Sequence durationInFrames={fps * timing.revealTimeInSecs}>
-    //     <Clip src={staticFile(songSrc)} startFrom={revealFrame} />
-    //   </Series.Sequence>
-    // </Series>
     <>
       <Sequence from={fps * timing.guessingTimeInSecs} durationInFrames={fps * (timing.revealTimeInSecs)} >
         <Clip src={staticFile(songSrc)} startFrom={revealFrame} />

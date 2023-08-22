@@ -5,15 +5,13 @@ type Props = {
 }
 
 export const ProgressBar:React.FC<Props> = ({ fillingTimeInSecs }) => {
-  const { fps, width, height, durationInFrames } = useVideoConfig()
+  const { fps, width, height } = useVideoConfig()
   const fillingTimeInFrames = fillingTimeInSecs * fps
   const frame = useCurrentFrame()
 
   const absoluteFillStyle = {
     justifyContent: 'center',
     alignItems: 'center',
-    // FontSize: 100
-    // backgroundColor: 'green',
   }
 
   const progressBarStyle = {
