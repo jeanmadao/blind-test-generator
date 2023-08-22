@@ -3,11 +3,12 @@ import { AbsoluteFill, interpolate, OffthreadVideo, useCurrentFrame, useVideoCon
 type Props = {
   src: string
   startFrom: number
+  maxVol: number
 }
 
-export const Clip:React.FC<Props> = ({ src, startFrom }) => {
+export const Clip: React.FC<Props> = ({ src, startFrom, maxVol }) => {
   const frame = useCurrentFrame()
-  const {durationInFrames, fps} = useVideoConfig()
+  const { durationInFrames, fps } = useVideoConfig()
   const absoluteFillStyle = {
     justifyContent: 'center',
     alignItems: 'center',
@@ -19,11 +20,11 @@ export const Clip:React.FC<Props> = ({ src, startFrom }) => {
   return (
     <AbsoluteFill style={absoluteFillStyle}>
       <OffthreadVideo
-      style={videoStyle}
-      src={src}
-      startFrom={startFrom}
-      volume={interpolate(frame,  [0, fps, durationInFrames - fps, durationInFrames],[0, 1, 1, 0])}
-    />
+        style={videoStyle}
+        src={src}
+        startFrom={startFrom}
+        volume={interpolate(frame, [0, fps, durationInFrames - fps, durationInFrames], [0, maxVol, maxVol, 0])}
+      />
     </AbsoluteFill>
   )
 }

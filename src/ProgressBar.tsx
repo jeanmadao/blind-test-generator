@@ -4,7 +4,7 @@ type Props = {
   fillingTimeInSecs: number
 }
 
-export const ProgressBar:React.FC<Props> = ({ fillingTimeInSecs }) => {
+export const ProgressBar: React.FC<Props> = ({ fillingTimeInSecs }) => {
   const { fps, width, height } = useVideoConfig()
   const fillingTimeInFrames = fillingTimeInSecs * fps
   const frame = useCurrentFrame()
@@ -20,7 +20,7 @@ export const ProgressBar:React.FC<Props> = ({ fillingTimeInSecs }) => {
   } as React.CSSProperties
 
   const barBorderStyle = {
-    padding: 20,
+    padding: 10,
     width: width * 0.6,
     border: 'solid',
     borderRadius: 30,
@@ -39,7 +39,7 @@ export const ProgressBar:React.FC<Props> = ({ fillingTimeInSecs }) => {
     ),
     backgroundColor: 'white'
   }
-  
+
   return (
     <AbsoluteFill style={absoluteFillStyle}>
       <div style={progressBarStyle} id='progress-bar'>

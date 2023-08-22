@@ -4,12 +4,12 @@ type Props = {
   children: React.ReactNode,
   lengthInSecs: number
 }
-export const FadeOut:React.FC<Props> = ({ children, lengthInSecs }) => {
+export const FadeOut: React.FC<Props> = ({ children, lengthInSecs }) => {
   const frame = useCurrentFrame()
-  const {fps, durationInFrames} = useVideoConfig()
+  const { fps, durationInFrames } = useVideoConfig()
   const lengthInFrames = fps * lengthInSecs
 
-  const style = {
+  const fadeOutStyle = {
     opacity: interpolate(
       frame,
       [durationInFrames - lengthInFrames, durationInFrames],
@@ -21,7 +21,7 @@ export const FadeOut:React.FC<Props> = ({ children, lengthInSecs }) => {
 
   }
   return (
-    <div style={style}>
+    <div style={fadeOutStyle}>
       {children}
     </div>
   )
